@@ -29,7 +29,7 @@ public class LogAspectJ {
         return o;
     }*/
 
-    @Pointcut("execution(* org.example.spring.*.addUser(..))")
+    @Pointcut("execution(* org.example.spring.bean.*.addUser(..))")
     public void pj(){
 
     }
