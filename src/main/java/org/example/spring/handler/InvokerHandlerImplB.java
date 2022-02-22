@@ -1,0 +1,13 @@
+package org.example.spring.handler;
+
+/**
+ * @author hetao
+ * @version 1.0
+ * @date 2022/2/19 13:15
+ */
+public class InvokerHandlerImplB implements InvokerHandler{
+    @Override
+    public void invoker() {
+
+    }
+}
