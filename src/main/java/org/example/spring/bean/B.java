@@ -20,13 +20,16 @@ public class B implements ApplicationContextAware {
 //        this.a = a;
 //    }
 
-    public void addUser(){
-        System.out.println("local invoke!!!");
+
+
+    public String addUser(){
+        System.out.println("3.local invoke!!!");
+        return "local";
     }
     public void test(){
-        B b = (B) AopContext.currentProxy();
-        B bean = applicationContext.getBean(B.class);
-        bean.addUser();
+        B b = (B) AopContext.currentProxy();//ThreadLocal缓存代理对象
+        B bean = applicationContext.getBean(B.class);//从spring容器拿代理对象
+        b.addUser();
         //addUser();//不会走addUser增强
     }
 

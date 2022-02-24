@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class CustomizeAdvisor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        System.out.println("----customize----");
+        //System.out.println("----customize----");
         return invocation.proceed();
     }
 }

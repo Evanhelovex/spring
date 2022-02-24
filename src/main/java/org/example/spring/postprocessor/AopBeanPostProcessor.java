@@ -1,9 +1,9 @@
 package org.example.spring.postprocessor;
 
+import org.example.spring.tools.CustomizeTargetSourceCreator;
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +22,8 @@ public class AopBeanPostProcessor implements BeanPostProcessor, PriorityOrdered 
         if(bean instanceof AnnotationAwareAspectJAutoProxyCreator){
             AnnotationAwareAspectJAutoProxyCreator annotationAwareAspectJAutoProxyCreator = (AnnotationAwareAspectJAutoProxyCreator) bean;
             annotationAwareAspectJAutoProxyCreator.setInterceptorNames("customizeAdvisor");
+            /*CustomizeTargetSourceCreator customizeTargetSourceCreator = new CustomizeTargetSourceCreator();
+            annotationAwareAspectJAutoProxyCreator.setCustomTargetSourceCreators(customizeTargetSourceCreator);*/
         }
         return bean;
     }

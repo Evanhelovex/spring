@@ -2,10 +2,7 @@ package org.example.spring.aop;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.stereotype.Component;
 
@@ -34,12 +31,34 @@ public class LogAspectJ {
 
     }
 
+    @Around("pj()")
+    public Object logAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("1.around before invoke!!!");
+//        MethodInvocation methodInvocation = ExposeInvocationInterceptor.currentInvocation();
+//        Object[] arguments = methodInvocation.getArguments();
+//        Method method = methodInvocation.getMethod();
+//        Object invoke = method.invoke(methodInvocation.getThis(), arguments);
+        Object proceed = proceedingJoinPoint.proceed();
+        System.out.println("6.around after invoke!!!");
+        return proceed;
+    }
     @Before("pj()")
-    public void logBefore() throws InvocationTargetException, IllegalAccessException {
+    public void logBefore(){
         MethodInvocation methodInvocation = ExposeInvocationInterceptor.currentInvocation();
         Object[] arguments = methodInvocation.getArguments();
         Method method = methodInvocation.getMethod();
         //method.invoke(methodInvocation.getThis(),arguments);
-        System.out.println("方法执行之前执行");
+        System.out.println("2.before invoke!!!");
+    }
+
+
+    @After(value = "pj()")
+    public void logAfter() {
+        System.out.println("5.after invoke!!!");
+    }
+
+    @AfterReturning(value = "pj()",returning="o")
+    public void logAfterReturning(Object o) {
+        System.out.println("4.after invoke returning object is "+o+"!!!");
     }
 }
